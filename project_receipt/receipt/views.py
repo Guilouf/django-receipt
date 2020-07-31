@@ -1,3 +1,15 @@
-from django.shortcuts import render
+from django.views.generic import ListView, CreateView
+from django.urls import reverse_lazy
 
-# Create your views here.
+from receipt import models, forms
+
+
+class ReceiptList(ListView):
+    model = models.Receipt
+
+
+class ReceiptCreate(CreateView):
+    success_url = reverse_lazy('receipt_list')  # or get_absolute_url() if detail
+    model = models.Receipt
+    form_class = forms.ReceiptForm
+
