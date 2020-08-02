@@ -10,4 +10,8 @@ urlpatterns = [
     path('establishment/create', views.EstablishmentCreate.as_view(), name='establishment_create'),
     path('establishment/<int:pk>/edit', views.EstablishmentUpdate.as_view(), name='establishment_update'),
     path('establishment/<int:pk>', views.EstablishmentDetail.as_view(), name='establishment_detail'),
+    path('company/', views.CompanyList.as_view(), name='company_list'),
+    path('company/create', views.CompanyCreate.as_view(), name='company_create'),
+    path('company/<int:pk>/edit', views.CompanyUpdate.as_view(), name='company_update'),
+    path('company/<int:pk>', views.CompanyDetail.as_view(), name='company_detail'),
 ]

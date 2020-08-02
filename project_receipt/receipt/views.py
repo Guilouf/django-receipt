@@ -38,3 +38,23 @@ class EstablishmentUpdate(UpdateView):
 
 class EstablishmentDetail(DetailView):
     model = models.Establishment
+
+
+class CompanyList(ListView):
+    model = models.Company
+
+
+class CompanyCreate(CreateView):
+    success_url = reverse_lazy('company_list')
+    model = models.Company
+    fields = '__all__'
+
+
+class CompanyUpdate(UpdateView):
+    success_url = reverse_lazy('company_list')
+    model = models.Company
+    fields = '__all__'
+
+
+class CompanyDetail(DetailView):
+    model = models.Company
