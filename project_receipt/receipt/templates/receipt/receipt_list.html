@@ -1,16 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Receipt list</title>
-</head>
-<body>
+{% extends 'common.html' %}
+
+{% block title %}Receipt list{% endblock %}
+
+{% block body %}
+<a href="{% url 'receipt_create' %}">New receipt</a>
 
 <table>
+
+  <tr>
+    <th>Receipt</th>
+    <th>Establishment</th>
+    <th>Company</th>
+  </tr>
+
 {% for object in object_list %}
-  <tr><td>{{ object }}</td><td><a href="{% url 'receipt_update' object.pk %}">Edit</a></td></tr>
+  <tr>
+    <td>{{ object }}</td>
+    <td><a href="{% url 'receipt_update' object.pk %}">Edit</a></td>
+    <td><a href="{% url 'establishment_detail' object.establishment_id %}">{{ object.establishment }}</a></td>
+    <td><a href="{% url 'company_detail' object.establishment.company_id %}">{{ object.establishment.company }}</a></td>
+  </tr>
 {% endfor %}
 </table>
-
-</body>
-</html>
+{% endblock %}

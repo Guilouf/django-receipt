@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Company list</title>
-</head>
-<body>
+{% extends 'common.html' %}
+
+{% block title %}Company list{% endblock %}
+
+{% block body %}
 
 <a href="{% url 'company_create'%}"> Create new company</a>
 
@@ -17,5 +15,4 @@
 {% endfor %}
 </table>
 
-</body>
-</html>
+{% endblock %}

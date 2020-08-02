@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load i18n %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    {% block imports %}{% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<nav>
+  <div class="w3-top">  <!--Stay even if scrolled-->
+    <div class="w3-bar w3-black">
+      <a href="{% url 'receipt_list'  %}" class="w3-bar-item w3-button">
+        {% trans 'Receipts' %}
+      </a>
+      <a href="{% url 'establishment_list'  %}" class="w3-bar-item w3-button">
+        {% trans 'Establishments' %}
+      </a>
+      <a href="{% url 'company_list'  %}" class="w3-bar-item w3-button">
+        {% trans 'Companies' %}
+      </a>
+      <a href="{% url 'tag_list'  %}" class="w3-bar-item w3-button">
+        {% trans 'Tags' %}
+      </a>
+      <a href="{% url 'admin:index'  %}" class="w3-bar-item w3-button">
+        {% trans 'Admin' %}
+      </a>
+    </div>
+  </div>
+  <br><br>
+</nav>
+
+<body>
+
+{% block body %}{% endblock %}
+</body>
+
+</html>

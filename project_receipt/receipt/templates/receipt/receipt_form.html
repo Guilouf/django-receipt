@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Create a new receipt</title>
-</head>
-<body>
+{% extends 'common.html' %}
+
+{% block title %}Create a new receipt{% endblock %}
+
+{% block body %}
 
   <form action="" method="post" enctype="multipart/form-data" id="postform">
     <table>
@@ -14,5 +12,4 @@
     <input type="submit" value="Submit" />
     </form>
 
-</body>
-</html>
+{% endblock %}
