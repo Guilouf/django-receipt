@@ -22,4 +22,17 @@
 
   </table>
 
+  <table>
+    <tr>
+      <th>Company name</th>
+    </tr>
+
+  {% for company in tag.company_set.all %}
+    <tr>
+      <td><a href="{% url 'company_detail' company.pk %}">{{ company }}</a></td>
+    </tr>
+  {% endfor %}
+
+  </table>
+
 {% endblock %}}

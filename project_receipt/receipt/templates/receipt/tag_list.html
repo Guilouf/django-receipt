@@ -4,6 +4,8 @@
 
 {% block body %}
 
+<a href="{% url 'tag_create' %}">New tag</a>
+
 <table>
 {% for object in object_list %}
   <tr>
