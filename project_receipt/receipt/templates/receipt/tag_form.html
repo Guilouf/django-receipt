@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tag create</title>
+</head>
+<body>
+
+  <form action="" method="post" enctype="multipart/form-data" id="postform">
+    <table>
+      {% csrf_token %}
+      {{ form }}
+    </table>
+    <input type="submit" value="Submit" />
+  </form>
+
+</body>
+</html>

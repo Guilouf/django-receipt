@@ -58,3 +58,23 @@ class CompanyUpdate(UpdateView):
 
 class CompanyDetail(DetailView):
     model = models.Company
+
+
+class TagList(ListView):
+    model = models.Tag
+
+
+class TagCreate(CreateView):
+    success_url = reverse_lazy('tag_list')
+    model = models.Tag
+    fields = '__all__'
+
+
+class TagUpdate(UpdateView):
+    success_url = reverse_lazy('tag_list')
+    model = models.Tag
+    fields = '__all__'
+
+
+class TagDetail(DetailView):
+    model = models.Tag
