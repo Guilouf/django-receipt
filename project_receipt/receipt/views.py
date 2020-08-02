@@ -1,7 +1,7 @@
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DetailView
 from django.urls import reverse_lazy
 
-from receipt import models, forms
+from receipt import models
 
 
 class ReceiptList(ListView):
@@ -11,11 +11,30 @@ class ReceiptList(ListView):
 class ReceiptCreate(CreateView):
     success_url = reverse_lazy('receipt_list')  # or get_absolute_url() if detail
     model = models.Receipt
-    form_class = forms.ReceiptForm
+    fields = '__all__'
 
 
 class ReceiptUpdate(UpdateView):
     success_url = reverse_lazy('receipt_list')
     model = models.Receipt
-    form_class = forms.ReceiptForm
+    fields = '__all__'
 
+
+class EstablishmentList(ListView):
+    model = models.Establishment
+
+
+class EstablishmentCreate(CreateView):
+    success_url = reverse_lazy('establishment_list')
+    model = models.Establishment
+    fields = '__all__'
+
+
+class EstablishmentUpdate(UpdateView):
+    success_url = reverse_lazy('establishment_list')
+    model = models.Establishment
+    fields = '__all__'
+
+
+class EstablishmentDetail(DetailView):
+    model = models.Establishment

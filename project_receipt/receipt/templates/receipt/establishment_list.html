@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Establishment list</title>
+</head>
+<body>
+
+<a href="{% url 'establishment_create' %}">Create new establishment</a>
+
+<table>
+{% for object in object_list %}
+  <tr>
+    <td><a href="{% url 'establishment_detail' object.pk %}">{{ object }}</a></td>
+    <td><a href="{% url 'establishment_update' object.pk %}">Edit</a></td>
+  </tr>
+{% endfor %}
+</table>
+
+</body>
+</html>
