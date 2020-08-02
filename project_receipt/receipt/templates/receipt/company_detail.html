@@ -4,6 +4,20 @@
 
 {% block body %}
 
-{{ company }}
+  {{ company }} <a href="{% url 'company_update' company.pk%}" class="w3-button w3-black w3-round-large">Edit</a>
+
+    <table>
+    <tr>
+      <th>Name</th>
+    </tr>
+
+  {% for establishment in company.establishment_set.all %}
+    <tr>
+      <td><a href="{% url 'establishment_detail' establishment.pk %}">{{ establishment }}</a></td>
+      <td><a href="{% url 'establishment_update' establishment.pk %}">Edit</a> </td>
+    </tr>
+  {% endfor %}
+
+  </table>
 
 {% endblock %}

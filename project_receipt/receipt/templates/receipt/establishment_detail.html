@@ -4,6 +4,22 @@
 
 {% block body %}
 
-{{ establishment }}
+  {{ establishment }} <a href="{% url 'establishment_update' establishment.pk%}" class="w3-button w3-black w3-round-large">Edit</a>
+
+  <table>
+    <tr>
+      <th>Amount</th>
+      <th>Date</th>
+    </tr>
+
+  {% for receipt in establishment.receipt_set.all %}
+    <tr>
+      <td>{{ receipt.amount }}</td>
+      <td>{{ receipt.date }}</td>
+      <td><a href="{% url 'receipt_update' receipt.pk %}">Edit</a> </td>
+    </tr>
+  {% endfor %}
+
+  </table>
 
  {% endblock %}
