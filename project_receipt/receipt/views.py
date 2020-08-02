@@ -1,7 +1,7 @@
 from django.views.generic import ListView, CreateView, UpdateView, DetailView
 from django.urls import reverse_lazy
 
-from receipt import models
+from receipt import models, forms
 
 
 class ReceiptList(ListView):
@@ -11,7 +11,18 @@ class ReceiptList(ListView):
 class ReceiptCreate(CreateView):
     success_url = reverse_lazy('receipt_list')
     model = models.Receipt
-    fields = '__all__'
+    form_class = forms.ReceiptForm
+
+
+class ReceiptFromEstablishmentCreate(CreateView):
+    success_url = reverse_lazy('receipt_list')
+    model = models.Receipt
+    form_class = forms.EstablishmentReceiptForm
+
+    def form_valid(self, form):
+        """Links the plant command to the Trial"""
+        form.instance.establishment = models.Establishment.objects.get(pk=self.kwargs['pk'])
+        return super().form_valid(form)
 
 
 class ReceiptUpdate(UpdateView):
