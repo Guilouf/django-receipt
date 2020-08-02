@@ -9,7 +9,7 @@ class ReceiptList(ListView):
 
 
 class ReceiptCreate(CreateView):
-    success_url = reverse_lazy('receipt_list')  # or get_absolute_url() if detail
+    success_url = reverse_lazy('receipt_list')
     model = models.Receipt
     fields = '__all__'
 
@@ -25,13 +25,11 @@ class EstablishmentList(ListView):
 
 
 class EstablishmentCreate(CreateView):
-    success_url = reverse_lazy('establishment_list')
     model = models.Establishment
     fields = '__all__'
 
 
 class EstablishmentUpdate(UpdateView):
-    success_url = reverse_lazy('establishment_list')
     model = models.Establishment
     fields = '__all__'
 
@@ -45,13 +43,11 @@ class CompanyList(ListView):
 
 
 class CompanyCreate(CreateView):
-    success_url = reverse_lazy('company_list')
     model = models.Company
     fields = '__all__'
 
 
 class CompanyUpdate(UpdateView):
-    success_url = reverse_lazy('company_list')
     model = models.Company
     fields = '__all__'
 
@@ -65,13 +61,11 @@ class TagList(ListView):
 
 
 class TagCreate(CreateView):
-    success_url = reverse_lazy('tag_list')
     model = models.Tag
     fields = '__all__'
 
 
 class TagUpdate(UpdateView):
-    success_url = reverse_lazy('tag_list')
     model = models.Tag
     fields = '__all__'
 

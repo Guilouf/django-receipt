@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Tag(models.Model):
@@ -7,12 +8,18 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('tag_detail', kwargs={"pk": self.pk})
+
 
 class Company(models.Model):
     name = models.CharField(max_length=200)
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('company_detail', kwargs={"pk": self.pk})
 
 
 class Establishment(models.Model):
@@ -21,6 +28,9 @@ class Establishment(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('establishment_detail', kwargs={"pk": self.pk})
 
 
 class Receipt(models.Model):
