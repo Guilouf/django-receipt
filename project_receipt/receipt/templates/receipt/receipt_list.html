@@ -8,6 +8,7 @@
 <table>
 
   <tr>
+    <th>Name</th>
     <th>Receipt</th>
     <th>Establishment</th>
     <th>Company</th>
@@ -18,7 +19,12 @@
     <td>{{ object }}</td>
     <td><a href="{% url 'receipt_update' object.pk %}">Edit</a></td>
     <td><a href="{% url 'establishment_detail' object.establishment_id %}">{{ object.establishment }}</a></td>
-    <td><a href="{% url 'company_detail' object.establishment.company_id %}">{{ object.establishment.company }}</a></td>
+
+    <td>{% if object.establishment.company_id %}
+      <a href="{% url 'company_detail' object.establishment.company_id %}">{{ object.establishment.company }}</a>
+      {% endif %}
+    </td>
+
   </tr>
 {% endfor %}
 </table>
