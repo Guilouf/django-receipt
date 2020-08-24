@@ -57,6 +57,12 @@ class CompanyCreate(CreateView):
     model = models.Company
     fields = '__all__'
 
+    def form_valid(self, form):
+        """Auto create an establishment for the new company"""
+        form_valid = super().form_valid(form)
+        models.Establishment.objects.create(name=form.instance.name, company=form.instance)
+        return form_valid
+
 
 class CompanyUpdate(UpdateView):
     model = models.Company
