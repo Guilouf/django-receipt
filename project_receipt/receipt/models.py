@@ -34,6 +34,7 @@ class Company(models.Model):
 class Establishment(models.Model):
     name = models.CharField(max_length=200)
     company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True)
+    city = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
         return self.name

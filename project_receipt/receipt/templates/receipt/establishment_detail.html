@@ -5,11 +5,19 @@
 {% block body %}
 
   <h2>Establishment: {{ establishment }}</h2>
+
+  <ul>
+    <li>Company: <a href="{% url 'company_detail' establishment.company.pk %}" > {{ establishment.company }} </a></li>
+    <li>City: {{ establishment.city }}</li>
+  </ul>
+
   <a href="{% url 'establishment_update' establishment.pk%}" class="w3-button w3-black w3-round-large">
     Edit</a>
   <a href="{% url 'establishment_add_receipt' establishment.pk%}" class="w3-button w3-black w3-round-large">
     Add new receipt</a>
 
+
+  <h3>Receipts:</h3>
   <table>
     <tr>
       <th>Amount</th>
