@@ -50,6 +50,12 @@ class Receipt(models.Model):
     tags = models.ManyToManyField(Tag, blank=True,
                                   limit_choices_to={'category__in': [Tag.TagCategory.RECEIPT, Tag.TagCategory.BOTH]}
                                   )
+    comment = models.TextField(blank=True, null=True)
+
+    liters = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)  # for gas stations
+
+    class Meta:
+        ordering = ('-date',)
 
     def __str__(self):
         return f'{self.amount}-{self.establishment}-{self.date}'
