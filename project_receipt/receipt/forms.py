@@ -17,15 +17,7 @@ class ReceiptForm(forms.ModelForm):
         fields = '__all__'
 
 
-class EstablishmentReceiptForm(forms.ModelForm):
-    date = forms.DateTimeField(
-        input_formats=['%Y-%m-%dT%H:%M'],
-        widget=forms.DateTimeInput(
-            attrs={
-                'type': 'datetime-local'},
-            format='%Y-%m-%dT%H:%M')
-    )
-
+class EstablishmentReceiptForm(ReceiptForm):
     class Meta:
         model = models.Receipt
         exclude = ('establishment',)

@@ -8,14 +8,16 @@
 <table>
 
   <tr>
-    <th>Receipt</th>
+    <th>Amount</th>
+    <th>Date</th>
     <th>Establishment</th>
     <th>Company</th>
   </tr>
 
 {% for object in object_list %}
   <tr>
-    <td>{{ object }}</td>
+    <td>{{ object.amount }}</td>
+    <td>{{ object.date|date:'d/m/Y H-i' }}</td>
     <td><a href="{% url 'receipt_update' object.pk %}">Edit</a></td>
     <td><a href="{% url 'establishment_detail' object.establishment_id %}">{{ object.establishment }}</a></td>
     <td><a href="{% url 'company_detail' object.establishment.company_id %}">{{ object.establishment.company }}</a></td>

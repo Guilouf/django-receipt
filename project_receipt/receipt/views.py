@@ -20,7 +20,7 @@ class ReceiptFromEstablishmentCreate(CreateView):
     form_class = forms.EstablishmentReceiptForm
 
     def form_valid(self, form):
-        """Links the plant command to the Trial"""
+        """Links the new receipt to an existing establishment"""
         form.instance.establishment = models.Establishment.objects.get(pk=self.kwargs['pk'])
         return super().form_valid(form)
 
@@ -28,7 +28,7 @@ class ReceiptFromEstablishmentCreate(CreateView):
 class ReceiptUpdate(UpdateView):
     success_url = reverse_lazy('receipt_list')
     model = models.Receipt
-    fields = '__all__'
+    form_class = forms.ReceiptForm
 
 
 class EstablishmentList(ListView):
