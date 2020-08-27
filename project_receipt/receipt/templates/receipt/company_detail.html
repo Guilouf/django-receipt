@@ -5,6 +5,9 @@
 {% block body %}
 
   {{ company }} <a href="{% url 'company_update' company.pk%}" class="w3-button w3-black w3-round-large">Edit</a>
+  <a href="{% url 'company_add_establishment' company.pk%}" class="w3-button w3-black w3-round-large">
+    Add establishment
+  </a>
 
     <table>
     <tr>

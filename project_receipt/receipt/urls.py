@@ -16,6 +16,8 @@ urlpatterns = [
     path('company/create', views.CompanyCreate.as_view(), name='company_create'),
     path('company/<int:pk>/edit', views.CompanyUpdate.as_view(), name='company_update'),
     path('company/<int:pk>', views.CompanyDetail.as_view(), name='company_detail'),
+    path('company/<int:pk>/add_establishment', views.EstablishmentFromCompanyCreate.as_view(),
+         name='company_add_establishment'),
     path('tag/', views.TagList.as_view(), name='tag_list'),
     path('tag/create', views.TagCreate.as_view(), name='tag_create'),
     path('tag/<int:pk>/edit', views.TagUpdate.as_view(), name='tag_update'),

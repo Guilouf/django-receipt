@@ -40,6 +40,16 @@ class EstablishmentCreate(CreateView):
     fields = '__all__'
 
 
+class EstablishmentFromCompanyCreate(CreateView):
+    model = models.Establishment
+    form_class = forms.CompanyEstablishmentForm
+
+    def form_valid(self, form):
+        """Links the new establishment to an existing company"""
+        form.instance.company = models.Company.objects.get(pk=self.kwargs['pk'])
+        return super().form_valid(form)
+
+
 class EstablishmentUpdate(UpdateView):
     model = models.Establishment
     fields = '__all__'

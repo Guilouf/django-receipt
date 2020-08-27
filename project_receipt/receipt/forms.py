@@ -30,3 +30,9 @@ class EstablishmentReceiptForm(forms.ModelForm):
         model = models.Receipt
         exclude = ('establishment',)
 
+
+class CompanyEstablishmentForm(forms.ModelForm):
+
+    class Meta:
+        model = models.Establishment
+        exclude = ('company',)
