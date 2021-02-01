@@ -1,5 +1,5 @@
 from django.views.generic import ListView, CreateView, UpdateView, DetailView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 from receipt import models, forms
 
@@ -67,11 +67,10 @@ class CompanyCreate(CreateView):
     model = models.Company
     fields = '__all__'
 
-    def form_valid(self, form):
-        """Auto create an establishment for the new company"""
-        form_valid = super().form_valid(form)
-        models.Establishment.objects.create(name=form.instance.name, company=form.instance)
-        return form_valid
+    def get_success_url(self):
+        """Auto create an establishment for the new company, and redirect to its update page"""
+        establishment = models.Establishment.objects.create(name=self.object.name, company=self.object)
+        return reverse('establishment_update', kwargs={"pk": establishment.id})
 
 
 class CompanyUpdate(UpdateView):
