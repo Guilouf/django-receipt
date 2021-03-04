@@ -4,7 +4,9 @@
 
 {% block body %}
 
-<a href="{% url 'tag_create' %}">New tag</a>
+<a href="{% url 'tag_create' %}" class="w3-button w3-black w3-round-xlarge">
+  New tag
+</a>
 
 <table>
 {% for object in object_list %}

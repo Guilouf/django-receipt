@@ -3,13 +3,16 @@
 {% block title %}Receipt list{% endblock %}
 
 {% block body %}
-<a href="{% url 'receipt_create' %}">New receipt</a>
+<a href="{% url 'receipt_create' %}" class="w3-button w3-black w3-round-xlarge">
+  New receipt
+</a>
 
 <table>
 
   <tr>
     <th>Amount</th>
     <th>Date</th>
+    <th></th>
     <th>Establishment</th>
     <th>Company</th>
   </tr>

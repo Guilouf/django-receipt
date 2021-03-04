@@ -4,7 +4,9 @@
 
 {% block body %}
 
-<a href="{% url 'establishment_create' %}">Create new establishment</a>
+<a href="{% url 'establishment_create' %}" class="w3-button w3-black w3-round-xlarge">
+  Create new establishment
+</a>
 
 <table>
 {% for object in object_list %}
