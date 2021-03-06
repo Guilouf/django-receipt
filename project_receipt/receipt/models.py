@@ -30,6 +30,11 @@ class Company(models.Model):
     def get_absolute_url(self):
         return reverse('company_detail', kwargs={"pk": self.pk})
 
+    def get_total(self):
+        """Sum of all receipt amount for an establishment, rounded to 2 places because sqlite does not
+        support Decimal internally"""
+        return f"{self.establishment_set.aggregate(sum=models.Sum('receipt__amount'))['sum']:0.2f}"
+
 
 class Establishment(models.Model):
     name = models.CharField(max_length=200)
@@ -42,6 +47,15 @@ class Establishment(models.Model):
     def get_absolute_url(self):
         return reverse('establishment_detail', kwargs={"pk": self.pk})
 
+    @property
+    def get_total(self):
+        return self.receipt_set.total()
+
+
+class ReceiptQueryset(models.QuerySet):
+    def total(self):
+        return f"{self.aggregate(sum=models.Sum('amount'))['sum']:0.2f}"
+
 
 class Receipt(models.Model):
     amount = models.DecimalField(max_digits=6, decimal_places=2)
@@ -53,6 +67,8 @@ class Receipt(models.Model):
     comment = models.TextField(blank=True, null=True)
 
     liters = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)  # for gas stations
+
+    objects = ReceiptQueryset.as_manager()
 
     class Meta:
         ordering = ('-date',)
