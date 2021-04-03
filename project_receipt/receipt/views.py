@@ -6,6 +6,7 @@ from receipt import models, forms
 
 class ReceiptList(ListView):
     model = models.Receipt
+    paginate_by = 50
 
 
 class ReceiptCreate(CreateView):
@@ -33,6 +34,7 @@ class ReceiptUpdate(UpdateView):
 
 class EstablishmentList(ListView):
     model = models.Establishment
+    paginate_by = 50
 
 
 class EstablishmentCreate(CreateView):
@@ -61,6 +63,7 @@ class EstablishmentDetail(DetailView):
 
 class CompanyList(ListView):
     model = models.Company
+    paginate_by = 50
 
 
 class CompanyCreate(CreateView):

@@ -24,6 +24,9 @@ class Company(models.Model):
                                   limit_choices_to={'category__in': [Tag.TagCategory.COMPANY, Tag.TagCategory.BOTH]}
                                   )
 
+    class Meta:
+        ordering = ('-id',)  # newer first
+
     def __str__(self):
         return self.name
 
@@ -40,6 +43,9 @@ class Establishment(models.Model):
     name = models.CharField(max_length=200)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     city = models.CharField(max_length=200, blank=True, null=True)
+
+    class Meta:
+        ordering = ('-id',)  # newer first
 
     def __str__(self):
         return self.name
