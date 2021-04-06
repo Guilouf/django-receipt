@@ -33,6 +33,7 @@ class Company(models.Model):
     def get_absolute_url(self):
         return reverse('company_detail', kwargs={"pk": self.pk})
 
+    @property
     def get_total(self):
         """Sum of all receipt amount for an establishment, rounded to 2 places because sqlite does not
         support Decimal internally"""

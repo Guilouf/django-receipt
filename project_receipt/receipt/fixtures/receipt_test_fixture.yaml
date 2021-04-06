@@ -1,8 +1,13 @@
-# Companys
+# Companies
 - model: receipt.company
   pk: 1
   fields:
     name: Aldi
+
+- model: receipt.company
+  pk: 2
+  fields:
+    name: Lidl
 
 # Establishments
 - model: receipt.establishment
@@ -12,6 +17,19 @@
     city: Berlin
     company: 1
 
+- model: receipt.establishment
+  pk: 2
+  fields:
+    name: Aldi in Alda
+    city: Alda
+    company: 1
+
+- model: receipt.establishment
+  pk: 3
+  fields:
+    name: Lidl in Dehli
+    city: Dehli
+    company: 2
 
 # Receipts
 - model: receipt.receipt
@@ -26,4 +44,11 @@
   fields:
     amount: 5.35
     date: *datetime1
-    establishment: 1
+    establishment: 2
+
+- model: receipt.receipt
+  pk: 3
+  fields:
+    amount: 10.35
+    date: *datetime1
+    establishment: 3
