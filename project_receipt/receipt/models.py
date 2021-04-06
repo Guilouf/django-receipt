@@ -38,7 +38,11 @@ class Company(models.Model):
     def get_total(self):
         """Sum of all receipt amount for an establishment, rounded to 2 places because sqlite does not
         support Decimal internally"""
-        return f"{self.establishment_set.aggregate(sum=Coalesce(models.Sum('receipt__amount'), 0))['sum']:0.2f}"
+        return "{:0.2f}".format(
+            self.establishment_set.aggregate(
+                sum=Coalesce(models.Sum('receipt__amount'), 0)
+            )['sum']
+        )
 
 
 class Establishment(models.Model):
@@ -62,7 +66,11 @@ class Establishment(models.Model):
 
 class ReceiptQueryset(models.QuerySet):
     def total(self):
-        return f"{self.aggregate(sum=Coalesce(models.Sum('amount'), 0))['sum']:0.2f}"
+        return "{:0.2f}".format(
+            self.aggregate(
+                sum=Coalesce(models.Sum('amount'), 0)
+            )['sum']
+        )
 
 
 class Receipt(models.Model):
