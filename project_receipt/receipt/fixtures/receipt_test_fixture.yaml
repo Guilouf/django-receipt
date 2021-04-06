@@ -9,6 +9,11 @@
   fields:
     name: Lidl
 
+- model: receipt.company
+  pk: 3
+  fields:
+    name: Foire Fouille
+
 # Establishments
 - model: receipt.establishment
   pk: 1
@@ -30,6 +35,13 @@
     name: Lidl in Dehli
     city: Dehli
     company: 2
+
+- model: receipt.establishment
+  pk: 4
+  fields:
+    name: Foire Fouille in Vouillé
+    city: Vouillé
+    company: 3
 
 # Receipts
 - model: receipt.receipt

@@ -12,7 +12,7 @@ class AmountsTestCase(TestCase):
 
     def test_establishment_total(self):
         """Check correct answer for total in each establishment"""
-        answers = ['50.35', '5.35', '10.35']
+        answers = ['50.35', '5.35', '10.35', '0.00']
         self.assertEqual(len(answers), Establishment.objects.count())
         for establishment, answer in zip(Establishment.objects.all().order_by('id'),
                                          answers):
@@ -21,7 +21,7 @@ class AmountsTestCase(TestCase):
 
     def test_company_total(self):
         """Check correct answer for total in each company"""
-        answers = ['55.70', '10.35']
+        answers = ['55.70', '10.35', '0.00']
         self.assertEqual(len(answers), Company.objects.count())
         for company, answer in zip(Company.objects.all().order_by('id'),
                                    answers):
