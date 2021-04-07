@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from receipt.models import Receipt, Establishment, Company, Tag
+from receipt.forms import ReceiptForm
 
 
 class AmountsTestCase(TestCase):
@@ -68,3 +69,34 @@ class TagTestCase(TestCase):
                 # todo validation error
                 print(list(response.context['messages']))
                 self.assertNotEqual(response.status_code, 302)  # redirect
+
+
+class FormsTestCase(TestCase):
+    fixtures = ['receipt_tag_fixture']
+
+    def setUp(self) -> None:
+        self.establishment = Establishment.objects.first()
+
+        self.tag_receipt = Tag.objects.create(category=Tag.TagCategory.RECEIPT)
+        self.tag_company = Tag.objects.create(category=Tag.TagCategory.COMPANY)
+        self.tag_both = Tag.objects.create(category=Tag.TagCategory.BOTH)
+
+    def test_receipt_form(self):
+        receipt_form_data = {'amount': 20.35,
+                             'date': '2021-04-06T15:02',
+                             'establishment': self.establishment.id
+                             }
+
+        # Allowed tags
+        form_data = {**receipt_form_data,
+                     'tags': [self.tag_receipt.id, self.tag_both.id]
+                     }
+        form = ReceiptForm(data=form_data)
+        self.assertTrue(form.is_valid())
+
+        # Not allowed tags
+        form_data = {**receipt_form_data,
+                     'tags': [self.tag_company.id]
+                     }
+        form = ReceiptForm(data=form_data)
+        self.assertFalse(form.is_valid())
