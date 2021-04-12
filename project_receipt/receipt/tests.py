@@ -36,10 +36,11 @@ class ViewTestCase(TestCase):
 
     def setUp(self) -> None:
         self.establishment = Establishment.objects.first()
+        self.company = Company.objects.first()
 
-    def test_create_linked_receipt(self):
+    def test_create_linked_receipt_from_establishment(self):
         """Ensure that receipt is automatically linked with the correct
-        object"""
+        establishment"""
         url = reverse('establishment_add_receipt', args=[self.establishment.id])
         self.assertEqual(self.establishment.receipt_set.count(), 0)
 
@@ -49,6 +50,18 @@ class ViewTestCase(TestCase):
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual(self.establishment.receipt_set.count(), 1)
+
+    def test_create_linked_establishment_from_company(self):
+        """Ensure that establishment is automatically linked with the correct
+        company"""
+        url = reverse('company_add_establishment', args=[self.company.id])
+        self.assertEqual(self.company.establishment_set.count(), 1)
+
+        data = {'name': 'Aldi in Dijon'}
+        response = self.client.post(url, data)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(self.company.establishment_set.count(), 2)
 
 
 class FormsTestCase(TestCase):
