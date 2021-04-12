@@ -32,42 +32,23 @@ class AmountsTestCase(TestCase):
 
 
 class ViewTestCase(TestCase):
+    fixtures = ['basic_establishment']
 
     def setUp(self) -> None:
         self.establishment = Establishment.objects.first()
 
-        self.tag_receipt = Tag.objects.create(category=Tag.TagCategory.RECEIPT)
-        self.tag_company = Tag.objects.create(category=Tag.TagCategory.COMPANY)
-        self.tag_both = Tag.objects.create(category=Tag.TagCategory.BOTH)
+    def test_create_linked_receipt(self):
+        """Ensure that receipt is automatically linked with the correct
+        object"""
+        url = reverse('establishment_add_receipt', args=[self.establishment.id])
+        self.assertEqual(self.establishment.receipt_set.count(), 0)
 
-        self.receipt_urls = [
-            reverse('receipt_create'),
-            reverse('receipt_update', args=[self.establishment.id]),
-            reverse('establishment_add_receipt', args=[self.establishment.id])
-        ]
+        data = {'amount': 20.35,
+                'date': '2021-04-06T15:02'}
+        response = self.client.post(url, data)
 
-        self.receipt_form_data = {'amount': 20.35,
-                                  'date': '2021-04-06T15:02',
-                                  'establishment': self.establishment.id}
-
-    def test_receipt_allowed_tags(self):
-        for url in self.receipt_urls:
-            with self.subTest(url=url):
-                # allowed tags
-                data = {**self.receipt_form_data,
-                        'tags': [self.tag_receipt.id, self.tag_both.id]
-                        }
-                response = self.client.post(url, data)
-                self.assertEqual(response.status_code, 302)  # redirect
-
-                # not allowed tags
-                data = {**self.receipt_form_data,
-                        'tags': [self.tag_company.id]
-                        }
-                response = self.client.post(url, data)
-                # todo validation error
-                print(list(response.context['messages']))
-                self.assertNotEqual(response.status_code, 302)  # redirect
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(self.establishment.receipt_set.count(), 1)
 
 
 class FormsTestCase(TestCase):
