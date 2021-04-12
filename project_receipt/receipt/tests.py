@@ -10,7 +10,7 @@ CompanyForm = modelform_factory(Company, fields='__all__')
 
 
 class AmountsTestCase(TestCase):
-    fixtures = ['receipt_test_fixture']
+    fixtures = ['multiple_receipts']
 
     def test_total_receipt_amount(self):
         """Check total amount of all existing tickets"""
