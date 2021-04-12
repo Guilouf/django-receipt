@@ -4,7 +4,7 @@
   fields:
     name: Aldi
 
-# Establishment
+# Establishments
 - model: receipt.establishment
   pk: 1
   fields:
