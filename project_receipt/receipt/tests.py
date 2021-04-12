@@ -31,8 +31,7 @@ class AmountsTestCase(TestCase):
                 self.assertEqual(company.get_total, answer)
 
 
-class TagTestCase(TestCase):
-    fixtures = ['receipt_tag_fixture']
+class ViewTestCase(TestCase):
 
     def setUp(self) -> None:
         self.establishment = Establishment.objects.first()
@@ -72,7 +71,7 @@ class TagTestCase(TestCase):
 
 
 class FormsTestCase(TestCase):
-    fixtures = ['receipt_tag_fixture']
+    fixtures = ['basic_establishment']
 
     def setUp(self) -> None:
         self.establishment = Establishment.objects.first()
