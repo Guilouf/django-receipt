@@ -1,0 +1,66 @@
+# Companies
+- model: receipt.company
+  pk: 1
+  fields:
+    name: Aldi
+
+- model: receipt.company
+  pk: 2
+  fields:
+    name: Lidl
+
+- model: receipt.company
+  pk: 3
+  fields:
+    name: Foire Fouille
+
+# Establishments
+- model: receipt.establishment
+  pk: 1
+  fields:
+    name: Aldi in Berlin
+    city: Berlin
+    company: 1
+
+- model: receipt.establishment
+  pk: 2
+  fields:
+    name: Aldi in Alda
+    city: Alda
+    company: 1
+
+- model: receipt.establishment
+  pk: 3
+  fields:
+    name: Lidl in Dehli
+    city: Dehli
+    company: 2
+
+- model: receipt.establishment
+  pk: 4
+  fields:
+    name: Foire Fouille in Vouillé
+    city: Vouillé
+    company: 3
+
+# Receipts
+- model: receipt.receipt
+  pk: 1
+  fields:
+    amount: 50.35
+    date: &datetime1 "2021-04-05 00:00:00+00:00"
+    establishment: 1
+
+- model: receipt.receipt
+  pk: 2
+  fields:
+    amount: 5.35
+    date: *datetime1
+    establishment: 2
+
+- model: receipt.receipt
+  pk: 3
+  fields:
+    amount: 10.35
+    date: *datetime1
+    establishment: 3

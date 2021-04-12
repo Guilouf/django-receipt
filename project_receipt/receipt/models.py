@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.functions import Coalesce
 from django.urls import reverse
 
 
@@ -33,10 +34,15 @@ class Company(models.Model):
     def get_absolute_url(self):
         return reverse('company_detail', kwargs={"pk": self.pk})
 
+    @property
     def get_total(self):
         """Sum of all receipt amount for an establishment, rounded to 2 places because sqlite does not
         support Decimal internally"""
-        return f"{self.establishment_set.aggregate(sum=models.Sum('receipt__amount'))['sum']:0.2f}"
+        return "{:0.2f}".format(
+            self.establishment_set.aggregate(
+                sum=Coalesce(models.Sum('receipt__amount'), 0)
+            )['sum']
+        )
 
 
 class Establishment(models.Model):
@@ -60,7 +66,11 @@ class Establishment(models.Model):
 
 class ReceiptQueryset(models.QuerySet):
     def total(self):
-        return f"{self.aggregate(sum=models.Sum('amount'))['sum']:0.2f}"
+        return "{:0.2f}".format(
+            self.aggregate(
+                sum=Coalesce(models.Sum('amount'), 0)
+            )['sum']
+        )
 
 
 class Receipt(models.Model):
