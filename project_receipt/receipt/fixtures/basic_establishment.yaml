@@ -1,12 +1,10 @@
 # Companies
-
 - model: receipt.company
   pk: 1
   fields:
     name: Aldi
 
 # Establishment
-
 - model: receipt.establishment
   pk: 1
   fields:
