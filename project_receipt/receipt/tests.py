@@ -75,6 +75,9 @@ class FormsTestCase(TestCase):
         self.tag_both = Tag.objects.create(category=Tag.TagCategory.BOTH)
 
     def test_receipt_form(self):
+        """Check if allowed tags can be linked with a receipt, and also if
+        unauthorised tags are refused
+        """
         receipt_form_data = {'amount': 20.35,
                              'date': '2021-04-06T15:02',
                              'establishment': self.establishment.id
