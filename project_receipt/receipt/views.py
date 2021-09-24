@@ -65,11 +65,20 @@ class CompanyList(ListView):
     model = models.Company
     paginate_by = 50
 
+    def setup(self, request, *args, **kwargs):
+        self.company_name_search_keyword = request.GET.get('company_name', '')
+        super().setup(request, *args, **kwargs)
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context_data = super().get_context_data(object_list=None, **kwargs)
+        context_data['company_name_keyword'] = self.company_name_search_keyword
+        return context_data
+
     def get_queryset(self):
         """Filter companies which have corresponding string in their names"""
         qs = super().get_queryset()
-        company_name = self.request.GET.get('company_name')
-        return qs.filter(name__icontains=company_name) if company_name else qs
+        return qs.filter(name__icontains=self.company_name_search_keyword)\
+            if self.company_name_search_keyword else qs
 
 
 class CompanyCreate(CreateView):
