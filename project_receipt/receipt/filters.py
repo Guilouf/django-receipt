@@ -5,4 +5,5 @@ from receipt.models import Company
 class CompanyFilter(FilterSet):
     class Meta:
         model = Company
-        fields = {'name': ['icontains']}
+        fields = {'name': ['icontains'],
+                  'tags': ['exact']}
