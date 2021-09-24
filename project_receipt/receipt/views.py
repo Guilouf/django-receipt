@@ -71,7 +71,10 @@ class CompanyList(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context_data = super().get_context_data(object_list=None, **kwargs)
+        # to keep search string in input box across pagination
         context_data['company_name_keyword'] = self.company_name_search_keyword
+        # to be appended to url get params
+        context_data['search_params'] = f'&company_name={self.company_name_search_keyword}'
         return context_data
 
     def get_queryset(self):
