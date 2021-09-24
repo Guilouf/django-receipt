@@ -1,7 +1,9 @@
 from django.views.generic import ListView, CreateView, UpdateView, DetailView
 from django.urls import reverse_lazy, reverse
 
-from receipt import models, forms
+from django_filters.views import FilterView
+
+from receipt import models, forms, filters
 
 
 class ReceiptList(ListView):
@@ -61,34 +63,11 @@ class EstablishmentDetail(DetailView):
     model = models.Establishment
 
 
-class CompanyList(ListView):
+class CompanyList(FilterView):
     model = models.Company
     paginate_by = 50
-
-    def setup(self, request, *args, **kwargs):
-        # get param key name
-        self.company_name_key = 'company_name'
-        # get param value
-        self.company_name_search_keyword = request.GET.get(self.company_name_key)
-        super().setup(request, *args, **kwargs)
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context_data = super().get_context_data(object_list=None, **kwargs)
-        # form input name
-        context_data['company_name_key'] = self.company_name_key
-
-        if self.company_name_search_keyword:
-            # to keep search string in input box across pagination
-            context_data['company_name_keyword'] = self.company_name_search_keyword
-            # to be appended to url get params
-            context_data['search_params'] = f'&{self.company_name_key}={self.company_name_search_keyword}'
-        return context_data
-
-    def get_queryset(self):
-        """Filter companies which have corresponding string in their names"""
-        qs = super().get_queryset()
-        return qs.filter(name__icontains=self.company_name_search_keyword)\
-            if self.company_name_search_keyword else qs
+    template_name = 'receipt/company_list.html'
+    filterset_class = filters.CompanyFilter
 
 
 class CompanyCreate(CreateView):
