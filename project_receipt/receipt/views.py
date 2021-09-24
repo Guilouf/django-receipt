@@ -66,15 +66,22 @@ class CompanyList(ListView):
     paginate_by = 50
 
     def setup(self, request, *args, **kwargs):
-        self.company_name_search_keyword = request.GET.get('company_name', '')
+        # get param key name
+        self.company_name_key = 'company_name'
+        # get param value
+        self.company_name_search_keyword = request.GET.get(self.company_name_key)
         super().setup(request, *args, **kwargs)
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context_data = super().get_context_data(object_list=None, **kwargs)
-        # to keep search string in input box across pagination
-        context_data['company_name_keyword'] = self.company_name_search_keyword
-        # to be appended to url get params
-        context_data['search_params'] = f'&company_name={self.company_name_search_keyword}'
+        # form input name
+        context_data['company_name_key'] = self.company_name_key
+
+        if self.company_name_search_keyword:
+            # to keep search string in input box across pagination
+            context_data['company_name_keyword'] = self.company_name_search_keyword
+            # to be appended to url get params
+            context_data['search_params'] = f'&{self.company_name_key}={self.company_name_search_keyword}'
         return context_data
 
     def get_queryset(self):
