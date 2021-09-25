@@ -7,6 +7,11 @@
   New receipt
 </a>
 
+<form class="w3-container" method="get">
+  {{ filter.form.as_p }}
+  <button class="w3-button w3-black" type="submit">Search</button>
+</form>
+
 <table>
   <tr>
     <th>Total: </th><th>{{ object_list.total }}</th>

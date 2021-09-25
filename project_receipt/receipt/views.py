@@ -6,9 +6,11 @@ from django_filters.views import FilterView
 from receipt import models, forms, filters
 
 
-class ReceiptList(ListView):
+class ReceiptList(FilterView):
     model = models.Receipt
     paginate_by = 50
+    template_name = 'receipt/receipt_list.html'
+    filterset_class = filters.ReceiptFilter
 
 
 class ReceiptCreate(CreateView):
