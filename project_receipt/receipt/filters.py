@@ -1,18 +1,12 @@
-from django.forms import DateTimeInput
-from django_filters import FilterSet, IsoDateTimeFilter
+from django_filters import FilterSet, DateFromToRangeFilter
+from django_filters.widgets import RangeWidget
 
 from receipt.models import Receipt, Establishment, Company
 
 
 class ReceiptFilter(FilterSet):
-    date_gte = IsoDateTimeFilter(field_name='date', lookup_expr='gte', widget=DateTimeInput(
-            attrs={
-                'type': 'datetime-local'},
-            ))
-    date_lte = IsoDateTimeFilter(field_name='date', lookup_expr='lte', widget=DateTimeInput(
-        attrs={
-            'type': 'datetime-local'},
-    ))
+    # im not filtering on datetime, if needed i can use isodatetimefilter
+    date_range = DateFromToRangeFilter(field_name='date', widget=RangeWidget(attrs={'type': 'date'}))
 
     class Meta:
         model = Receipt
