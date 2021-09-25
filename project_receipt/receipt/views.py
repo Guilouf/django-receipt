@@ -1,12 +1,16 @@
 from django.views.generic import ListView, CreateView, UpdateView, DetailView
 from django.urls import reverse_lazy, reverse
 
-from receipt import models, forms
+from django_filters.views import FilterView
+
+from receipt import models, forms, filters
 
 
-class ReceiptList(ListView):
+class ReceiptList(FilterView):
     model = models.Receipt
     paginate_by = 50
+    template_name = 'receipt/receipt_list.html'
+    filterset_class = filters.ReceiptFilter
 
 
 class ReceiptCreate(CreateView):
@@ -32,9 +36,11 @@ class ReceiptUpdate(UpdateView):
     form_class = forms.ReceiptForm
 
 
-class EstablishmentList(ListView):
+class EstablishmentList(FilterView):
     model = models.Establishment
     paginate_by = 50
+    template_name = 'receipt/establishment_list.html'
+    filterset_class = filters.EstablishmentFilter
 
 
 class EstablishmentCreate(CreateView):
@@ -61,9 +67,11 @@ class EstablishmentDetail(DetailView):
     model = models.Establishment
 
 
-class CompanyList(ListView):
+class CompanyList(FilterView):
     model = models.Company
     paginate_by = 50
+    template_name = 'receipt/company_list.html'
+    filterset_class = filters.CompanyFilter
 
 
 class CompanyCreate(CreateView):

@@ -1,4 +1,5 @@
 django
+django-filter
 
 # For tests
 pyyaml
