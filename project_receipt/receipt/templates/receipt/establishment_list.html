@@ -8,6 +8,11 @@
   Create new establishment
 </a>
 
+<form class="w3-container" method="get">
+  {{ filter.form }}
+  <button class="w3-button w3-black" type="submit">Search</button>
+</form>
+
 <table>
 {% for object in object_list %}
   <tr>

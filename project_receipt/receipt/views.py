@@ -34,9 +34,11 @@ class ReceiptUpdate(UpdateView):
     form_class = forms.ReceiptForm
 
 
-class EstablishmentList(ListView):
+class EstablishmentList(FilterView):
     model = models.Establishment
     paginate_by = 50
+    template_name = 'receipt/establishment_list.html'
+    filterset_class = filters.EstablishmentFilter
 
 
 class EstablishmentCreate(CreateView):
