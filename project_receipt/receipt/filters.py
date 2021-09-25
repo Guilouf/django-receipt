@@ -5,7 +5,7 @@ from receipt.models import Receipt, Establishment, Company
 
 
 class ReceiptFilter(FilterSet):
-    # im not filtering on datetime, if needed i can use isodatetimefilter
+    # i am not filtering on datetime, if needed i can use isodatetimefilter
     date_range = DateFromToRangeFilter(field_name='date', widget=RangeWidget(attrs={'type': 'date'}))
     amount_range = RangeFilter(field_name='amount')
 
