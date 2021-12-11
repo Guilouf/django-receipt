@@ -40,7 +40,7 @@ class Company(models.Model):
         support Decimal internally"""
         return "{:0.2f}".format(
             self.establishment_set.aggregate(
-                sum=Coalesce(models.Sum('receipt__amount'), 0)
+                sum=Coalesce(models.Sum('receipt__amount'), 0, output_field=models.DecimalField())
             )['sum']
         )
 
@@ -68,7 +68,7 @@ class ReceiptQueryset(models.QuerySet):
     def total(self):
         return "{:0.2f}".format(
             self.aggregate(
-                sum=Coalesce(models.Sum('amount'), 0)
+                sum=Coalesce(models.Sum('amount'), 0, output_field=models.DecimalField())
             )['sum']
         )
 
