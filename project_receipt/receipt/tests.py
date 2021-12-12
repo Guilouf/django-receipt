@@ -15,6 +15,7 @@ class AmountsTestCase(TestCase):
     def test_total_receipt_amount(self):
         """Check total amount of all existing tickets"""
         self.assertEqual(Receipt.objects.all().total(), '66.05')
+        self.assertEqual(Receipt.objects.none().total(), '0.00')  # check if working on empty qs
 
     def test_establishment_total(self):
         """Check correct answer for total in each establishment"""
