@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models.functions import Coalesce
 from django.urls import reverse
 
 
@@ -40,8 +39,8 @@ class Company(models.Model):
         support Decimal internally"""
         return "{:0.2f}".format(
             self.establishment_set.aggregate(
-                sum=Coalesce(models.Sum('receipt__amount'), 0, output_field=models.DecimalField())
-            )['sum']
+                sum=models.Sum('receipt__amount')
+            )['sum'] or 0  # coalesce does not work with aggregates
         )
 
 
@@ -68,8 +67,8 @@ class ReceiptQueryset(models.QuerySet):
     def total(self):
         return "{:0.2f}".format(
             self.aggregate(
-                sum=Coalesce(models.Sum('amount'), 0, output_field=models.DecimalField())
-            )['sum']
+                sum=models.Sum('amount')
+            )['sum'] or 0  # coalesce does not work with aggregates
         )
 
 
