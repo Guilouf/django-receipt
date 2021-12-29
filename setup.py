@@ -7,7 +7,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name='django-receipt',
-    version='1.0.0',
+    version='1.0.1',
     packages=['receipt', 'receipt.templates', 'receipt.templatetags'],
     package_dir={'': 'project_receipt'},
     url='https://github.com/Guilouf/django-receipt',
