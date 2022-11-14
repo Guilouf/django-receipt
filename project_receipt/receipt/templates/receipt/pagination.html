@@ -6,8 +6,8 @@
       <a class="w3-button" href="?{% param_replace page=1 %}"><<</a>
       <a class="w3-button" href="?{% param_replace page=page_obj.previous_page_number %}"><</a>
     {% else %}
-      <button class="w3-button" disabled=""><<</button>
-      <button class="w3-button" disabled=""><</button>
+      <button class="w3-button" disabled><<</button>
+      <button class="w3-button" disabled><</button>
     {% endif %}
 
     {% for num in page_obj.paginator.page_range %}
